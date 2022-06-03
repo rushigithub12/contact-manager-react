@@ -37,46 +37,55 @@ function Read() {
   };
 
   return (
-    <Table celled>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>ID</Table.HeaderCell>
-          <Table.HeaderCell>FirstName</Table.HeaderCell>
-          <Table.HeaderCell>LastName</Table.HeaderCell>
-          <Table.HeaderCell>Update</Table.HeaderCell>
-          <Table.HeaderCell>Delete</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
+    <>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>FirstName</Table.HeaderCell>
+            <Table.HeaderCell>LastName</Table.HeaderCell>
+            <Table.HeaderCell>Update</Table.HeaderCell>
+            <Table.HeaderCell>Delete</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
 
-      <Table.Body>
-        {apiData.map((data) => {
-          return (
-            <Table.Row>
-              <Table.Cell>{data.id}</Table.Cell>
-              <Table.Cell>{data.firstName}</Table.Cell>
-              <Table.Cell>{data.lastName}</Table.Cell>
-              <Table.Cell>
-                <Link to="/update">
-                  <Button
-                    color="green"
-                    onClick={() =>
-                      updateID(data.id, data.firstName, data.lastName)
-                    }
-                  >
-                    Update
-                  </Button>
-                </Link>
-              </Table.Cell>
-              <Table.Cell>
+        <Table.Body>
+          {apiData.map((data) => {
+            return (
+              <Table.Row>
+                <Table.Cell>{data.id}</Table.Cell>
+                <Table.Cell>{data.firstName}</Table.Cell>
+                <Table.Cell>{data.lastName}</Table.Cell>
+                <Table.Cell>
+                  <Link to="/update">
+                    <Button
+                      color="green"
+                      onClick={() =>
+                        updateID(data.id, data.firstName, data.lastName)
+                      }
+                    >
+                      Update
+                    </Button>
+                  </Link>
+                </Table.Cell>
+                <Table.Cell>
                   <Button color="red" onClick={() => onDelete(data.id)}>
                     Delete
                   </Button>
-              </Table.Cell>
-            </Table.Row>
-          );
-        })}
-      </Table.Body>
-    </Table>
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
+      </Table>
+      <div className="backBtn">
+        <Link to="/">
+          <Button color="blue" style={{ marginLeft: '15rem' }}>
+            Back
+          </Button>
+        </Link>
+      </div>
+    </>
   );
 }
 
