@@ -8,11 +8,34 @@ function Read() {
 
   useEffect(() => {
     axios
-      .get("https://62988193f2decf5bb7445218.mockapi.io/crud-react")
+      .get(`https://62988193f2decf5bb7445218.mockapi.io/crud-react`)
       .then((getData) => {
         setApiData(getData.data);
       });
   });
+
+  const updateID = (id, firstName, lastName) => {
+    localStorage.setItem("ID", id);
+    localStorage.setItem("firstName", firstName);
+    localStorage.setItem("lastName", lastName);
+  };
+
+  const getData = () => {
+    axios
+      .get(`https://62988193f2decf5bb7445218.mockapi.io/crud-react`)
+      .then((getData) => {
+        setApiData(getData.data);
+      });
+  };
+
+  const onDelete = (id) => {
+    axios
+      .delete(`https://62988193f2decf5bb7445218.mockapi.io/crud-react/${id}`)
+      .then(() => {
+        getData();
+      });
+  };
+
   return (
     <Table celled>
       <Table.Header>
@@ -34,13 +57,20 @@ function Read() {
               <Table.Cell>{data.lastName}</Table.Cell>
               <Table.Cell>
                 <Link to="/update">
-                  <Button color="green">Update</Button>
+                  <Button
+                    color="green"
+                    onClick={() =>
+                      updateID(data.id, data.firstName, data.lastName)
+                    }
+                  >
+                    Update
+                  </Button>
                 </Link>
               </Table.Cell>
               <Table.Cell>
-                <Link to="/delete">
-                  <Button color="red">Delete</Button>
-                </Link>
+                  <Button color="red" onClick={() => onDelete(data.id)}>
+                    Delete
+                  </Button>
               </Table.Cell>
             </Table.Row>
           );

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function Create() {
+  let navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
@@ -11,6 +12,8 @@ function Create() {
     axios.post("https://62988193f2decf5bb7445218.mockapi.io/crud-react", {
       firstName,
       lastName,
+    }).then(() => {
+      navigate('/read')
     });
   };
   return (
@@ -31,12 +34,10 @@ function Create() {
           onChange={(e) => setLastName(e.target.value)}
         />
       </Form.Field>
-      <Link to="/read">
         {" "}
         <Button type="submit" onClick={sendDataToAPI}>
           Submit
         </Button>
-      </Link>
     </Form>
   );
 }
